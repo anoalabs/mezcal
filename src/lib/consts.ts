@@ -80,3 +80,11 @@ export const BLOCK_CHECK_INTERVAL = Number(
 
 export const CONFIRM_DEPTH = Number(process.env.CONFIRM_DEPTH ?? "6"); // default to 6 confirmations
 export const BITCOINJS_NETWORK = bitcoin.networks.bitcoin;
+
+// Shadowbanned mezcals (lowercase names): hidden from the /etchings/all listing
+// and its search, but still reachable directly by name or protocol id.
+export const SHADOWBANNED_MEZCAL_NAMES: ReadonlySet<string> = new Set([
+  "nigger",
+  "beaner",
+  "puto",
+]);

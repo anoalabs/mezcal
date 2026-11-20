@@ -6,6 +6,7 @@ import {
   cacheGetAllEtchings,
   cacheGetSingleEtchingByIdentifier,
 } from "../lib/cache";
+import { SHADOWBANNED_MEZCAL_NAMES } from "@/lib/consts";
 
 const router = Router();
 
@@ -34,7 +35,10 @@ router.get("/all", async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    let filtered = allEtchings.etchings;
+    // shadowbanned mezcals stay reachable via /info and /holders, just not listed
+    let filtered = allEtchings.etchings.filter(
+      (mezcal) => !SHADOWBANNED_MEZCAL_NAMES.has(mezcal.name.toLowerCase())
+    );
 
     if (status !== "all") {
       filtered = filtered.filter((mezcal) => {
